@@ -33,7 +33,7 @@ jobs:
             ghcr.io/${{ github.repository }}:${{ github.sha }}
 
       - name: Update GitOps repository
-        shell: pwsh
+        shell: powershell                 # <-- Changed from 'pwsh' to 'powershell'
         env:
           GIT_TOKEN: ${{ secrets.GITOPS_PAT }}
         run: |
@@ -48,7 +48,7 @@ jobs:
           git clone https://github.com/aniketpuro/grade-api-gitops.git gitops
           cd gitops
           
-          # 4. Replace Image Tag (PowerShell equivalent of 'sed')
+          # 4. Replace Image Tag
           $fileName = "deployment.yaml"
           $repo = "${{ github.repository }}"
           $sha = "${{ github.sha }}"
