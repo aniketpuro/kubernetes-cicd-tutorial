@@ -33,7 +33,7 @@ jobs:
             ghcr.io/${{ github.repository }}:${{ github.sha }}
 
       - name: Update GitOps repository
-        shell: powershell                 # <-- Changed from 'pwsh' to 'powershell'
+        shell: powershell
         env:
           GIT_TOKEN: ${{ secrets.GITOPS_PAT }}
         run: |
@@ -41,21 +41,21 @@ jobs:
           git config --global credential.helper store
           "https://$($env:GIT_TOKEN):x-oauth-basic@github.com" | Out-File -FilePath "$env:USERPROFILE\.git-credentials" -Encoding ASCII
           
-          # 2. Clean old directory (Windows safe command)
+          # 2. Clean old directory
           if (Test-Path gitops) { Remove-Item -Recurse -Force gitops }
           
           # 3. Clone Repository
           git clone https://github.com/aniketpuro/grade-api-gitops.git gitops
           cd gitops
           
-          # 4. Replace Image Tag
+          # 4. Replace Image Tag (Fixed Syntax)
           $fileName = "deployment.yaml"
           $repo = "${{ github.repository }}"
           $sha = "${{ github.sha }}"
           
-          # Reading and Replacing content
+          # Reading and Replacing content using ${} to avoid syntax error
           $content = Get-Content $fileName
-          $newContent = $content -replace "image: ghcr.io/$repo:.*", "image: ghcr.io/$repo:$sha"
+          $newContent = $content -replace "image: ghcr.io/${repo}:.*", "image: ghcr.io/${repo}:${sha}"
           Set-Content -Path $fileName -Value $newContent
           
           # 5. Commit and Push
