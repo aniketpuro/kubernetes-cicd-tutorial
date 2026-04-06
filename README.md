@@ -15,25 +15,6 @@ This project is maintained by **@aniketpuro**. If you fork this repo, remember t
 
 ---
 
-## Repository Structure
-
-> Note: The exact files/folders may evolve. Refer to the repo tree for the latest layout.
-
----
-
-## Prerequisites
-
-You’ll need the following before starting:
-
-- **A Kubernetes cluster** (local or cloud)
-- **kubectl** installed and configured
-  - Video: https://youtu.be/IBkU4dghY0Y
-- **Helm** installed
-  - Guide: https://aniketpuro.github.io/aniketpuro/lesson.html?course=prometheus-grafana-monitoring-course&lesson=helm-installation
-- A **GitHub account**
-
----
-
 ## Install Argo CD
 
 Add the Argo Helm repo and install Argo CD into the `argocd` namespace:
@@ -117,13 +98,6 @@ kubectl create secret docker-registry ghcr-secret \
   --docker-password=YOUR_PAT \
   --namespace=default
 ```
-
----
-
-## Tutorial Links
-
-- YouTube Tutorial: https://youtu.be/GlhK7mz5IJo
-- Written Article: https://aniketpuro.github.io/aniketpuro/lesson.html
 
 ---
 
